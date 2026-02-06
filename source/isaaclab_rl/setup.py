@@ -47,10 +47,16 @@ EXTRAS_REQUIRE = {
         "gym",
     ],  # rl-games still needs gym :(
     "rsl-rl": ["rsl-rl-lib==3.1.2", "onnxscript>=0.5"],  # linux aarch 64 requires manual onnxscript installation
+    # VLA / imitation learning integrations
+    # Note: gr00t and cosmos-policy are installed separately from their local clones.
+    # These extras only pull in lightweight shared dependencies.
+    "gr00t": ["transformers>=4.40", "Pillow"],
+    "cosmos-policy": ["transformers>=4.40", "Pillow"],
 }
 # Add the names with hyphens as aliases for convenience
 EXTRAS_REQUIRE["rl_games"] = EXTRAS_REQUIRE["rl-games"]
 EXTRAS_REQUIRE["rsl_rl"] = EXTRAS_REQUIRE["rsl-rl"]
+EXTRAS_REQUIRE["cosmos_policy"] = EXTRAS_REQUIRE["cosmos-policy"]
 
 # Cumulation of all extra-requires
 EXTRAS_REQUIRE["all"] = list(itertools.chain.from_iterable(EXTRAS_REQUIRE.values()))
@@ -71,7 +77,7 @@ setup(
     install_requires=INSTALL_REQUIRES,
     dependency_links=PYTORCH_INDEX_URL,
     extras_require=EXTRAS_REQUIRE,
-    packages=["isaaclab_rl"],
+    packages=["isaaclab_rl", "isaaclab_rl.gr00t", "isaaclab_rl.cosmos_policy"],
     classifiers=[
         "Natural Language :: English",
         "Programming Language :: Python :: 3.10",
